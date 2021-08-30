@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": false,
+    "strict": true,
+    "lib": ["ESNext", "DOM"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules", "webpack.config.js"]
+}

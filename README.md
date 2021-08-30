@@ -1,2 +1,3 @@
-# box-game
-Simple webgame
+# Cube Game
+
+Simple web game
