@@ -41,6 +41,9 @@ export class Player implements Model {
     this.element.width = Math.ceil(this.width);
     this.element.height = Math.ceil(this.height);
     this.element.style.position = 'absolute';
+    this.element.style.zIndex = '0';
+    this.element.style.left = '0px';
+    this.element.style.top = '0px';
 
     this.context.strokeStyle = Color(this.color).lighten(0.5).string();
 
@@ -83,5 +86,13 @@ export class Player implements Model {
 
     this.element.style.left = `${this.position.x}px`;
     this.element.style.top = `${this.position.y}px`;
+  }
+
+  public get collisionAbove(): number {
+    return this.position.y + this.height - this.side3;
+  }
+
+  public get collisionBelow(): number {
+    return this.position.y + this.height;
   }
 }
