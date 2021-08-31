@@ -6,7 +6,7 @@ import { Background } from '@/models/background';
 import { BelowObstacle } from '@/models/below-obstacle';
 import { Panel } from '@/models/panel';
 import { Player } from '@/models/player';
-import { positiveNumber, randomArbitrary } from '@/utilities/math/number';
+import { randomArbitrary } from '@/utilities/math/number';
 import { color } from '@/utilities/theme';
 
 const game = new Game();
@@ -88,21 +88,15 @@ for (let index = 0; index < 10; index++) {
     color: color.success,
   });
 
-  game.renderModel(aboveObstacle, { x: game.window.width + 5 * player.width * index, y: 0 });
+  game.renderModel(aboveObstacle, { x: game.window.width + 10 * player.width * index, y: 0 });
 
-  game.renderModel(belowObstacle, { x: game.window.width + 5 * player.width * index, y: aboveObstacle.side3 + 3 * player.height });
+  game.renderModel(belowObstacle, { x: game.window.width + 10 * player.width * index, y: aboveObstacle.side3 + 3 * player.height });
 
   game.renderAnimation('OBSTACLE_MOVE', () => {
-    const difficult = {
-      distance: player.height + positiveNumber(10 - level()) * player.height,
-      sparseness: 10 * player.width + positiveNumber(10 - level()) * player.width,
-      speed: 20 * (1 + level()),
-    };
-
-    let newPositionX = aboveObstacle.position.x - difficult.speed;
+    let newPositionX = aboveObstacle.position.x - 20 * (1 + level());
 
     if (newPositionX + aboveObstacle.width <= 0) {
-      newPositionX = game.window.width + difficult.sparseness * 9;
+      newPositionX = game.window.width + 10 * player.width * 9;
       scorePanel.setContent(`Level: ${level()} - Score: ${++score}`);
     }
 
