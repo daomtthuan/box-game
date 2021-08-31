@@ -14,9 +14,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
-    "bootstrap": "^5.1.0"
+    "bootstrap": "^5.1.0",
+    "color": "^4.0.1"
   },
   "devDependencies": {
+    "@types/color": "^3.0.2",
     "@webpack-cli/generators": "^2.3.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "copy-webpack-plugin": "^9.0.1",
