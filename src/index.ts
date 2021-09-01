@@ -32,12 +32,12 @@ const player = new Player({
   color: color.primary,
 });
 
-const level = () => score / 10;
+const level = () => Math.floor(score / 10);
 
 game.renderModel(player, { x: player.width, y: (game.window.height - player.height) / 2 });
 
 game.renderAnimation('PLAYER_FALL_DOWN', () => {
-  const newPositionY = player.position.y + 20 * (1 + level());
+  const newPositionY = player.position.y + 10 * (1 + level());
 
   if (newPositionY > game.window.height - player.height) {
     game.stopAnimation();
@@ -54,7 +54,7 @@ game.onClick(() => {
   }
 
   game.renderAnimation('PLAYER_FLY_UP', () => {
-    const newPositionY = player.position.y - 200 * (1 + level());
+    const newPositionY = player.position.y - 120 * (1 + level());
 
     if (newPositionY <= 0) {
       return;
@@ -71,10 +71,12 @@ game.onClick(() => {
 const obstacles: { above: AboveObstacle; below: BelowObstacle }[] = [];
 
 for (let index = 0; index < 10; index++) {
+  const distance = randomArbitrary(5, 10) * player.height;
+
   const aboveObstacle = new AboveObstacle({
     side1: 50,
     side2: 50,
-    side3: randomArbitrary(player.height, game.window.height - 3 * player.height),
+    side3: randomArbitrary(0, game.window.height - 3 * player.height),
     angle1: 120,
     angle2: 120,
     color: color.success,
@@ -82,7 +84,7 @@ for (let index = 0; index < 10; index++) {
   const belowObstacle = new BelowObstacle({
     side1: 50,
     side2: 50,
-    side3: game.window.height - 3 * player.height - aboveObstacle.side3,
+    side3: game.window.height - aboveObstacle.side3 - distance,
     angle1: 120,
     angle2: 120,
     color: color.success,
@@ -90,10 +92,10 @@ for (let index = 0; index < 10; index++) {
 
   game.renderModel(aboveObstacle, { x: game.window.width + 10 * player.width * index, y: 0 });
 
-  game.renderModel(belowObstacle, { x: game.window.width + 10 * player.width * index, y: aboveObstacle.side3 + 3 * player.height });
+  game.renderModel(belowObstacle, { x: game.window.width + 10 * player.width * index, y: aboveObstacle.side3 + distance });
 
   game.renderAnimation('OBSTACLE_MOVE', () => {
-    let newPositionX = aboveObstacle.position.x - 20 * (1 + level());
+    let newPositionX = aboveObstacle.position.x - 10 * (1 + level());
 
     if (newPositionX + aboveObstacle.width <= 0) {
       newPositionX = game.window.width + 10 * player.width * 9;
